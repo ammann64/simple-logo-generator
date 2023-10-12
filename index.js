@@ -14,15 +14,19 @@
 // THEN I am shown a 300x200 pixel image that matches the criteria I entered
 const { default: inquirer } = require("inquirer");
 const jest = require("jest");
-const questions = [
+const shapes = require('./lib/shapes');
+
+const questions = [ // Questions array to pass into inquirer
     {name: 'text', message: 'Please enter up to three characters to display in the logo: '},
     {name: 'textColor', message: 'Please enter the desired text color in keyword or hexidecimal format: '},
     {type: 'list', name: 'shape', message: 'Please choose a shape: ', choices: ['circle', 'triangle', 'square']},
     {name: 'shapeColor', message: 'Please enter the desired shape color in keyword or hexidecimal format: '}
 ];
+const fileName = 'logo.svg';
 
 
 inquirer
-    .prompt([
-
-    ])
+    .prompt(questions) //Prompts the user
+    .then((answers) => { //Once answers are received...
+        const {text, textColor, shape, shapeColor} = answers;
+    })
