@@ -12,11 +12,10 @@
 // AND the output text "Generated logo.svg" is printed in the command line
 // WHEN I open the `logo.svg` file in a browser
 // THEN I am shown a 300x200 pixel image that matches the criteria I entered
-const inquirer = require('./node_modules/inquirer/');
-const jest = require("jest");
-const shapes = require('./lib/shapes');
-const fs = require('fs');
-const { error } = require("console");
+import inquirer from 'inquirer';
+import jest from 'jest';
+import {Rectangle, Triangle, Circle} from './lib/shapes.js';
+import fs from 'fs';
 
 const questions = [ // Questions array to pass into inquirer
     {name: 'text', message: 'Please enter up to three characters to display in the logo: '},
@@ -33,18 +32,18 @@ inquirer
         const {text, textColor, shape, shapeColor} = answers;
         switch (shape) {
             case 'circle':
-                var logoData = new shapes.Circle(text, textColor, shapeColor);
-                logo = logoData.formatCircle();
+                var logoData = new Circle(text, textColor, shapeColor);
+                var logo = logoData.formatCircle();
                 RenderSVG(logo);
                 break;
             case 'rectangle':
-                var logoData = new shapes.Rectangle(text, textColor, shapeColor);
-                logo = logoData.formatRectangle();
+                var logoData = new Rectangle(text, textColor, shapeColor);
+                var logo = logoData.formatRectangle();
                 RenderSVG(logo);
                 break;
             case 'triangle':
-                var logoData = new shapes.Triangle(text, textColor, shapeColor);
-                logo = logoData.formatTriangle();
+                var logoData = new Triangle(text, textColor, shapeColor);
+                var logo = logoData.formatTriangle();
                 RenderSVG(logo);
                 break;
             default:
