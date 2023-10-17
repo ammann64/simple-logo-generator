@@ -12,18 +12,18 @@
 // AND the output text "Generated logo.svg" is printed in the command line
 // WHEN I open the `logo.svg` file in a browser
 // THEN I am shown a 300x200 pixel image that matches the criteria I entered
-import inquirer from 'inquirer';
-import jest from 'jest';
-import {Rectangle, Triangle, Circle} from './lib/shapes.js';
-import fs from 'fs';
-
+const inquirer = require('inquirer');
+const {Rectangle, Triangle, Circle} = require('./lib/shapes')
+const fs = require('fs');
+const setWidth = 300;
+const setHeight = 200;
 const questions = [ // Questions array to pass into inquirer
     {name: 'text', message: 'Please enter up to three characters to display in the logo: '},
     {name: 'textColor', message: 'Please enter the desired text color in keyword or hexidecimal format: '},
-    {type: 'list', name: 'shape', message: 'Please choose a shape: ', choices: ['circle', 'triangle', 'square']},
+    {type: 'list', name: 'shape', message: 'Please choose a shape: ', choices: ['circle', 'triangle', 'rectangle']},
     {name: 'shapeColor', message: 'Please enter the desired shape color in keyword or hexidecimal format: '}
 ];
-const fileName = 'logo.svg';
+const filePath = './examples/logo.svg';
 
 
 inquirer
@@ -32,18 +32,22 @@ inquirer
         const {text, textColor, shape, shapeColor} = answers;
         switch (shape) {
             case 'circle':
-                var logoData = new Circle(text, textColor, shapeColor);
+                var logoData = new Circle(text, textColor, setWidth, setHeight, shapeColor);
+                console.log(logoData);
                 var logo = logoData.formatCircle();
+                console.log(logo);
                 RenderSVG(logo);
                 break;
             case 'rectangle':
-                var logoData = new Rectangle(text, textColor, shapeColor);
+                var logoData = new Rectangle(text, textColor, setWidth, setHeight, shapeColor);
                 var logo = logoData.formatRectangle();
+                console.log(logo);
                 RenderSVG(logo);
                 break;
             case 'triangle':
-                var logoData = new Triangle(text, textColor, shapeColor);
+                var logoData = new Triangle(text, textColor, setWidth, setHeight, shapeColor);
                 var logo = logoData.formatTriangle();
+                console.log(logo)
                 RenderSVG(logo);
                 break;
             default:
@@ -53,5 +57,6 @@ inquirer
 
 
 function RenderSVG(logo) {
-
+    fs.writeFile(filePath, logo, (err) =>
+    err ? console.error(err) : console.log('Generated logo.svg'));
 }
