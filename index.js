@@ -1,17 +1,3 @@
-// GIVEN a command-line application that accepts user input
-// WHEN I am prompted for text
-// THEN I can enter up to three characters
-// WHEN I am prompted for the text color
-// THEN I can enter a color keyword (OR a hexadecimal number)
-// WHEN I am prompted for a shape
-// THEN I am presented with a list of shapes to choose from: circle, triangle, and square
-// WHEN I am prompted for the shape's color
-// THEN I can enter a color keyword (OR a hexadecimal number)
-// WHEN I have entered input for all the prompts
-// THEN an SVG file is created named `logo.svg`
-// AND the output text "Generated logo.svg" is printed in the command line
-// WHEN I open the `logo.svg` file in a browser
-// THEN I am shown a 300x200 pixel image that matches the criteria I entered
 const inquirer = require('inquirer');
 const {Rectangle, Triangle, Circle} = require('./lib/shapes')
 const fs = require('fs');
@@ -31,27 +17,27 @@ inquirer
     .then((answers) => { //Once answers are received...
         const {text, textColor, shape, shapeColor} = answers;
         switch (shape) {
-            case 'circle':
-                var logoData = new Circle(text, textColor, setWidth, setHeight, shapeColor);
-                console.log(logoData);
-                var logo = logoData.formatCircle();
+            case 'circle': //If a circle was selected
+                var logoData = new Circle(text, textColor, setWidth, setHeight, shapeColor); //Constructs a new circle with the user input
+                // console.log(logoData);
+                var logo = logoData.formatCircle(); //Formats the data into SVG
                 console.log(logo);
-                RenderSVG(logo);
+                RenderSVG(logo); //Writes the logo to a file
                 break;
-            case 'rectangle':
-                var logoData = new Rectangle(text, textColor, setWidth, setHeight, shapeColor);
-                var logo = logoData.formatRectangle();
+            case 'rectangle': //If a rectangle was selected
+                var logoData = new Rectangle(text, textColor, setWidth, setHeight, shapeColor); //Constructs a new rectangle with the user input
+                var logo = logoData.formatRectangle(); //Formats the data into SVG
                 console.log(logo);
-                RenderSVG(logo);
+                RenderSVG(logo); //Writes the logo to a file
                 break;
             case 'triangle':
-                var logoData = new Triangle(text, textColor, setWidth, setHeight, shapeColor);
-                var logo = logoData.formatTriangle();
+                var logoData = new Triangle(text, textColor, setWidth, setHeight, shapeColor); //Constructs a new triangle with the user input
+                var logo = logoData.formatTriangle(); //Formats the data into SVG
                 console.log(logo)
-                RenderSVG(logo);
+                RenderSVG(logo); //Writes the logo to a file
                 break;
             default:
-                console.error('Invalid shape, please try again');
+                console.error('Invalid shape, please try again'); //If somehow an invalid shape was selected, outputs an error
         }
     })
 

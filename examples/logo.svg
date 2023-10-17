@@ -1,8 +1,8 @@
 
     <svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">
 
-        <rect width="295" height="195" fill="blue"/>
+        <polygon points="150 0, 0 200, 300 200" fill="black"/>
 
-        <text x="147.5" y="97.5" fill="red" font-size="60" text-anchor="middle">AMC</text>
+        <text x="150" y="133.33333333333334" fill="white" font-size="60" text-anchor="middle">AMC</text>
 
     </svg>
